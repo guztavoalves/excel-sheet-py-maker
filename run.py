@@ -1,6 +1,8 @@
 """
 Filename: run.py
-Description: Make Excel Sheets easy
+Description: Make Excel Sheets Easy simplifies creating Excel sheets. 
+Customize columns, set data types, and input entries effortlessly to generate organized, ready-to-use spreadsheets 
+quickly and efficiently.
 Author: Gustavo Alves
 Date: 2024-26-10
 Site: https://github.com/guztavoalves
