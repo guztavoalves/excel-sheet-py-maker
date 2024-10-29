@@ -6,6 +6,7 @@ quickly and efficiently.
 Author: Gustavo Alves
 Date: 2024-26-10
 Site: https://github.com/guztavoalves
+Version: 1.0
 """
 from datetime import datetime
 import os, time
@@ -13,24 +14,24 @@ import pandas as pd
 
 # Initial configurations
 #
-input_types = ['texto','número','data','moeda']
+input_types = ['text','number','date','currency']
 columns_config = {}
 
 # SHOW INFO
 #
 def show_columns_info(cols):
     clean()
-    print(f'\nSua planilha possui {len(cols)} colunas:\n')
+    print(f'\nYour spreadsheet has {len(cols)} columns:\n')
 
     has_columns_config = len(columns_config) > 0
 
     for i, col in enumerate(cols,1):
         colum_type = columns_config[col] if has_columns_config else '-'
-        print(f'Coluna #{i}: [{col}] | Tipo: [{colum_type}]')
+        print(f'Column #{i}: [{col}] | Type: [{colum_type}]')
 
 def show_input_types(colum):
     clean()
-    print(f'\nQual o tipo de dados a coluna [{colum}] irá receber?\n')
+    print(f'\nWhat type of data will column [{colum}] receive?\n')
     for i, itp in enumerate(input_types,1):
         print(i, itp, sep=' - ')
 
@@ -47,14 +48,14 @@ def clean():
 
 def input_get_col_name():
     clean()
-    return input('\nDigite o nome de cada coluna separado por virgula: \n')
+    return input('\nEnter the name of each column separated by commas: \n')
 
-def input_get_col_value(col, col_type='texto'):
+def input_get_col_value(col, col_type='text'):
     clean()
-    return input(f'\nDigite os dados para o campo do tipo {col_type} [{col}]: \n')
+    return input(f'\nEnter data for the field of type {col_type} [{com}]: \n')
 
 def input_press_to_continue():
-    input('Pressione ENTER para tentar novamente...')
+    input('Press ENTER to try again...')
 
 
 # MESSAGES / ASK
@@ -64,65 +65,65 @@ def msg_title():
 
 def msg_exit():
     clean()
-    print('\nAté logo! =)')
+    print('\nSee you later! =)')
 
 def msg_sheet_create():
     clean()
-    print('\nCriando tabela...\n')
+    print('\nCreating table...\n')
 
 def msg_sucess():
     clean()
-    print('\nArquivo excel salvo com sucesso!\n')
+    print('\nExcel file saved successfully!\n')
 
 def msg_invalid_data():
     clean()
-    print('\nDigite ao menos um valor válido!\n')
+    print('\nEnter at least one valid value!\n')
     input_press_to_continue()
 
 def msg_column_empty():
     clean()
-    print('\nDigite ao menos o nome de uma coluna!\n')
+    print('\nEnter at least one column name!\n')
     input_press_to_continue()
 
 def msg_invalid_type_select():
-    print('\nSelecione um dos números disponíveis!\n')
+    print('\nSelect one of the available numbers!\n')
 
 def ask_continue_make_sheets():
     clean()
-    if input('\nDeseja criar outra planilha? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to create another spreadsheet? (Y/n) \n').lower() in ['y','yes']:
         return True
     
     return False
 
 def ask_reset_columns_register():
-    if input('\nDeseja refazer as colunas da planilha? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to redo the spreadsheet columns? (Y/n) \n').lower() in ['y','yes']:
         return True
     
     return False
 
 def ask_reset_columns_config():
-    if input('\nDeseja refazer as configurações das colunas da planilha? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to redo the spreadsheet column settings? (Y/n) \n').lower() in ['y','yes']:
         return True
     
     return False
 
 def ask_configure_columns():
     clean()
-    if input('\nDeseja configurar as colunas da sua planilha? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to configure the columns in your spreadsheet? (Y/n) \n') in ['y','yes']:
         return True
     
     return False
 
 def ask_continue_insert_colum():
     clean()
-    if input('\nDeseja inserir outra coluna? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to insert another column? (Y/n) \n') in ['y','yes']:
         return True
     
     return False
 
 def ask_continue_insert_entries():
     clean()
-    if input('\nDeseja inserir outro registro? (Y/n) \n') in ['Y','y','yes','s','S','Sim','sim']:
+    if input('\nDo you want to insert another record? (Y/n) \n') in ['y','yes']:
         return True
     
     return False
@@ -134,16 +135,16 @@ def validator(data, data_type):
 
     match data_type:
 
-        case 'texto':
+        case 'text':
             return valid_text(data)
 
-        case 'número':
+        case 'number':
             return valid_number(data)
 
-        case 'data':
+        case 'date':
             return valid_date(data)
 
-        case 'moeda':
+        case 'currency':
             return valid_currency(data)
 
     return False
@@ -228,7 +229,7 @@ def make_data_entries():
         if ask_configure_columns():
             columns_config.update(configure_columns(cols))
         else:
-            columns_config.update(configure_columns(cols,'texto'))
+            columns_config.update(configure_columns(cols,'text'))
 
         show_columns_info(cols)
 
@@ -290,7 +291,7 @@ def make_sheet_entry(col):
 def select_input_type():
 
     while True:
-        data_input = input('Digite o número: ')
+        data_input = input('Enter the number: ')
         data_valid = int(data_input) if valid_number(data_input) else None
 
         if data_valid and data_valid <= len(input_types):
@@ -307,7 +308,7 @@ def main():
         
     while True:
         clean()
-        filename = input('\nDigite o nome do arquivo excel: \n')
+        filename = input('\nEnter the name of the excel file: \n')
 
         data = get_data()
         msg_sheet_create()

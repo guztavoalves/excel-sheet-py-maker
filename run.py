@@ -6,6 +6,7 @@ quickly and efficiently.
 Author: Gustavo Alves
 Date: 2024-26-10
 Site: https://github.com/guztavoalves
+Version: 1.0
 """
 import excel_sheet_py_maker as espm
 
