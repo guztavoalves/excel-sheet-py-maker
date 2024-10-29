@@ -52,7 +52,7 @@ def input_get_col_name():
 
 def input_get_col_value(col, col_type='text'):
     clean()
-    return input(f'\nEnter data for the field of type {col_type} [{com}]: \n')
+    return input(f'\nEnter data for the field of type {col_type} [{col}]: \n')
 
 def input_press_to_continue():
     input('Press ENTER to try again...')
